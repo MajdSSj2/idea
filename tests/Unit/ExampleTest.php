@@ -1,5 +1,10 @@
 <?php
 
-test('that true is true', function () {
-    expect(true)->toBeTrue();
+use App\Models\Idea;
+use App\Models\User;
+
+test('it belongs to a user', function () {
+    $idea = Idea::factory()->create();
+    
+    expect($idea->user)->toBeInstanceOf(User::class);
 });
