@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App;
 
-use phpDocumentor\Reflection\Types\Static_;
-
 enum IdeaStatus: string
 {
     case PENDING = 'pending';
@@ -23,6 +21,6 @@ enum IdeaStatus: string
 
     public static function values(): array
     {
-        return array_map(fn($status) => $status->value, static::cases());
+        return array_map(fn (IdeaStatus $status) => $status->value, self::cases());
     }
 }

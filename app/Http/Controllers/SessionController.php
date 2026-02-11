@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class SessionController extends Controller
 {
-    public function create() : View {
+    public function create(): View
+    {
         return view('auth.login');
     }
 
@@ -19,19 +22,22 @@ class SessionController extends Controller
             'password' => ['required', 'string', 'min:8', 'max:255'],
         ]);
 
-       if (!Auth::attempt($attributes)){
+        if (! Auth::attempt($attributes)) {
 
-           return back()
-               ->withErrors(['password' => 'we are unable to authenticate you using the provided credentials.'])
-               ->withInput();
-       }
+            return back()
+                ->withErrors(['password' => 'we are unable to authenticate you using the provided credentials.'])
+                ->withInput();
+        }
 
         $request->session()->regenerate();
 
-       return redirect()->intended('/')->with('success', 'You have successfully logged in');
+        return redirect()->intended('/')->with('success', 'You have successfully logged in');
     }
-    public function destroy (){
+
+    public function destroy()
+    {
         Auth::logout();
+
         return redirect('/login');
     }
 }
