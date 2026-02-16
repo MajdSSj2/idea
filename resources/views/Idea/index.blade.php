@@ -8,6 +8,7 @@
                 @click="$dispatch('open-modal', 'create-idea')"
                 is="button"
                 type="button"
+                data-test="create-idea-button"
                 class="text-left mt-100 w-full cursor-pointer h-32">
                 <p>post an idea</p>
             </x-card>
@@ -65,6 +66,7 @@
                                     <button
                                         class="btn flex-1 h-10"
                                         type="button"
+                                        data-test="button-status-{{$status->value}}"
                                         @click="status = @js($status->value)"
                                         :class="status === @js($status->value) ? '' : 'btn-outlined'"
                                     >
