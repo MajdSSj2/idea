@@ -52,7 +52,9 @@
                     x-data="{
                     status: 'pending',
                     newLink: '',
-                    links: []
+                    links: [],
+                    newStep: '',
+                    steps: []
                     }"
                     method="POST"
                     action="{{route('idea.store')}}"
@@ -93,6 +95,44 @@
                             type="textarea"
                             placeholder="Describe your idea..."
                         />
+                        <div>
+                            <fieldset class="space-y-3">
+                                <legend class="label">Actionable steps</legend>
+
+                                <template x-for="(step, index) in steps" :key="step">
+                                    <div class="flex gap-x-2 items-center">
+
+                                        <input class="input" name="steps[]" x-model="step">
+                                        <button
+                                            type="button"
+                                            @click="steps.splice(index, 1)"
+                                            aria-label="remove link"
+                                        >
+                                            -
+                                        </button>
+                                    </div>
+                                </template>
+                                <div class="flex gap-x-2 items-center">
+                                    <input
+                                        x-model="newStep"
+                                        id="new-step"
+                                        data-test="new-step"
+                                        placeholder="what needs to be done?"
+                                        class="input flex x-1"
+                                        spellcheck="false"
+                                    >
+                                    <button
+                                        type="button"
+                                        data-test="submit-new-link-button"
+                                        @click="steps.push(newStep.trim()); newStep = ''"
+                                        :disabled="newStep.trim().length === 0"
+                                        aria-label="add new link"
+                                    >
+                                        +
+                                    </button>
+                                </div>
+                            </fieldset>
+                        </div>
 
                         <div>
                             <fieldset class="space-y-3">

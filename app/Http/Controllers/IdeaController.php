@@ -45,8 +45,9 @@ class IdeaController extends Controller
      */
     public function store(StoreIdeaRequest $request): RedirectResponse
     {
+        $idea = Auth::user()->ideas()->create($request->safe()->except('steps'));
 
-        Auth::user()->ideas()->create($request->validated());
+        $idea->steps()->createMany(collect($request->steps)->map(fn($step) => ['description' => $step]));
 
         return to_route('idea.index');
     }
