@@ -19,11 +19,12 @@ class Step extends Model
         'is_completed' => false,
     ];
 
-    public function isCompleted() : Attribute{
-         return Attribute::make(
-             get : fn() => $this->attributes['is_completed'],
-             set : fn($value) => $this->attributes['is_completed'] = $value,
-         );
+    public function isCompleted(): Attribute
+    {
+        return Attribute::make(
+            get : fn () => $this->attributes['is_completed'],
+            set : fn ($value) => $this->attributes['is_completed'] = $value,
+        );
     }
 
     public function idea(): BelongsTo

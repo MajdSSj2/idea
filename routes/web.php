@@ -15,7 +15,6 @@ Route::delete('/ideas/{idea}', [IdeaController::class, 'destroy'])->name('idea.d
 
 Route::patch('/steps/{step}', [StepController::class, 'update'])->name('step.update')->middleware('auth');
 
-
 Route::get('/register', [RegisterdUserController::class, 'create'])->middleware('guest');
 Route::post('/register', [RegisterdUserController::class, 'store'])->middleware('guest');
 

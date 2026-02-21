@@ -134,10 +134,10 @@
                                     >
                                     <button
                                         type="button"
-                                        data-test="submit-new-link-button"
+                                        data-test="submit-new-step-button"
                                         @click="steps.push(newStep.trim()); newStep = ''"
                                         :disabled="newStep.trim().length === 0"
-                                        aria-label="add new link"
+                                        aria-label="add new step    "
                                     >
                                         +
                                     </button>
