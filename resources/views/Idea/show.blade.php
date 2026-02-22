@@ -7,7 +7,11 @@
             </a>
 
             <div class="gap-x-3 flex items-center">
-                <button class="btn btn-outlined">Edit Idea</button>
+                <button x-data
+                    class="btn btn-outlined"
+                        data-test="edit-idea-button"
+                        @click="$dispatch('open-modal', 'edit-idea')"
+                >Edit Idea</button>
                 <form method="POST" action="{{route('idea.destroy', $idea)}}">
                     @csrf
                     @method('DELETE')
@@ -22,14 +26,18 @@
                 </div>
             @endif
             <h1 class="font-bold text-4xl">{{ $idea->title }}</h1>
+
             <div class="mt-2 flex gap-x-3 items-center">
                 <x-idea.status-label :status="$idea->status->value">{{$idea->status->label()}}</x-idea.status-label>
                 <div class="text-muted-foreground text-sm">{{$idea->created_at->diffForHumans()}}</div>
             </div>
             <div class="mt-6">
-                <x-card>
-                    <div class="text-foreground max-w-none cursor-pointer">{{ $idea->description }}</div>
-                </x-card>
+                @if($idea->description)
+                    <x-card>
+                        <div class="text-foreground max-w-none cursor-pointer">{{ $idea->description }}</div>
+                    </x-card>
+                @endif
+
             </div>
 
             @if ($idea->steps->count())
@@ -74,7 +82,7 @@
                     </div>
                 </div>
             @endif
-
         </div>
+        <x-idea.IdeaModal :idea="$idea" />
     </div>
 </x-layout>
